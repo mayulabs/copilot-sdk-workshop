@@ -1,5 +1,10 @@
 # GitHub Copilot SDK Workshops
 
+> **Apoio didático deste fork (Node.js, PT-BR):** consulte o
+> [guia rápido da apresentadora](GUIA-APRESENTADORA-MUSEU.md) e o
+> [guia das alunas](start-museum/nodejs/GUIA-ALUNAS.md).
+> Os exercícios continuam vazios; os comentários não alteram a execução.
+
 Start today: http://github.github.com/copilot-sdk-workshop/
 
 Choose one of three hands-on GitHub Copilot SDK workshops in .NET, Node.js/TypeScript, Python, Go,

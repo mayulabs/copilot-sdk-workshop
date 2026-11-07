@@ -1,5 +1,11 @@
 // Museum Exhibit Studio — learner entrypoint.
 //
+// APOIO DIDATICO (PT-BR): leia o GUIA-ALUNAS.md no starter Node.js.
+// Cliente = conexao com o runtime; sessao = conversa; prompt = tarefa.
+// Mensagem de sistema orienta o modelo; ferramentas e permissoes limitam acoes.
+// Comece no starter; use finished apenas para conferir a referencia concluida.
+// Estes comentarios ficam fora das regioes: preserve-os ao colar os blocos.
+//
 // HOW TO EDIT THIS FILE
 //
 // Every place you write code is a named region between two marker lines:
@@ -54,6 +60,8 @@ import {
 import { curatorWithResearchSystemMessage, researchSystemMessage } from "./system-messages.js";
 // <<< END imports
 
+// ETAPA 4/6: o pedido define como usar as fontes; nao autoriza ferramentas sozinho.
+// Pesquisa complementar nao vira fato aprovado pela educadora.
 // >>> BEGIN exhibit-prompt | Step 4: INSERT | Step 6: REPLACE
 function buildExhibitPrompt(hasWikipediaResearch: boolean): string {
   const lookupInstructions = hasWikipediaResearch
@@ -88,6 +96,8 @@ Created ${exhibitFileName}`;
 }
 // <<< END html-prompt
 
+// ETAPA 4/6: tools registra funcoes; availableTools expoe as que a sessao pode usar.
+// Registrar uma ferramenta nao a chama: confira os eventos durante a execucao.
 // >>> BEGIN generation-config | Step 4: INSERT | Step 6: REPLACE
 function generationConfig(
   approvedFacts: Iterable<string>,
@@ -112,6 +122,8 @@ function generationConfig(
 }
 // <<< END generation-config
 
+// ETAPA 6: pesquisa em sessao separada, com busca/leitura MCP e negacao por padrao.
+// A geracao recebe uma captura da pesquisa, nao acesso direto a Wikipedia.
 // >>> BEGIN research-config | Step 6: INSERT
 function researchConfig(): SessionConfig {
   return {
@@ -126,6 +138,8 @@ function researchConfig(): SessionConfig {
 }
 // <<< END research-config
 
+// ETAPA 7: o handler restringe a escrita a exhibit.html no diretorio da aplicacao.
+// Pedir um unico arquivo no prompt nao substitui essa verificacao de permissao.
 // >>> BEGIN html-config | Step 7: INSERT
 function htmlConfig(workingDirectory: string): SessionConfig {
   return {
@@ -139,6 +153,8 @@ function htmlConfig(workingDirectory: string): SessionConfig {
 }
 // <<< END html-config
 
+// ETAPA 4: um executor concentra conexao, timeout, resposta nao vazia e limpeza.
+// finally encerra recursos mesmo com erro; nao depende de o modelo cooperar.
 // >>> BEGIN session-runner | Step 4: INSERT
 async function runSession(
   config: SessionConfig,
@@ -196,6 +212,8 @@ async function main(): Promise<void> {
     }
     // <<< END research
 
+    // ETAPAS 1-6: conecte, converse, receba a resposta e encerre os recursos.
+    // A primeira resposta usa memoria do modelo; plausibilidade nao prova verdade.
     // >>> BEGIN generate | Step 1: INSERT | Steps 2-6: REPLACE
     console.log();
     const exhibit = await runSession(
@@ -205,6 +223,7 @@ async function main(): Promise<void> {
     );
     // <<< END generate
 
+    // ETAPA 5: PASS comprova formato, nao verdade historica. Revise as afirmacoes.
     // >>> BEGIN validate | Step 5: INSERT
     console.log();
     console.log(formatValidation(validateExhibit(exhibit)));
